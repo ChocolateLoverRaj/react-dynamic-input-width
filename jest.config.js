@@ -1,5 +1,5 @@
 module.exports = {
-  roots: ['<rootDir>/test'],
+  roots: ['<rootDir>/src'],
   testMatch: [
     '**/__tests__/**/*.+(ts|tsx|js)',
     '**/?(*.)+(spec|test).+(ts|tsx|js)',
@@ -13,5 +13,13 @@ module.exports = {
     'ts-jest': {
       tsconfig: 'tsconfig.json'
     }
-  }
+  },
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  moduleDirectories: ["src", "node_modules", __dirname, "utils"],
+  moduleNameMapper: {
+    'src/(.*)': '<rootDir>/src/$1',
+    'tests/(.*)': '<rootDir>/__tests__/$1',
+  },
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"]
 }

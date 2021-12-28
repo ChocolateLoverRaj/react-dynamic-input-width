@@ -1,3 +1,1 @@
-import { Num } from './Num'
-
-export { Num }
+export { default } from './InputDynamicWidth';
