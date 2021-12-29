@@ -1,6 +1,6 @@
 {
-  "name": "react-dynamic-input-width",
-  "version": "1.0.0",
+  "name": "@jimsheen/react-dynamic-input-width",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -20,7 +20,7 @@
     "test": "jest --no-cache --runInBand",
     "test:watch": "jest --watch --no-cache --runInBand",
     "test:cov": "jest --coverage --no-cache --runInBand",
-    "addscope": "node tools/packagejson name @tomchen/example-typescript-package"
+    "addscope": "node tools/packagejson name @jimsheen/react-dynamic-input-width"
   },
   "publishConfig": {
     "access": "public"
@@ -40,13 +40,13 @@
   ],
   "author": "James Sheen <james@sheendigitalmedia.com",
   "license": "MIT",
-  "homepage": "https://github.com/tomchen/example-typescript-package",
+  "homepage": "https://github.com/jimsheen/react-dynamic-input-width",
   "repository": {
     "type": "git",
-    "url": "git@github.com:tomchen/example-typescript-package.git"
+    "url": "git@github.com:jimsheen/react-dynamic-input-width.git"
   },
   "bugs": {
-    "url": "https://github.com/tomchen/example-typescript-package/issues"
+    "url": "https://github.com/jimsheen/react-dynamic-input-width/issues"
   },
   "dependencies": {},
   "devDependencies": {

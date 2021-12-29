@@ -5,8 +5,9 @@ export interface InputDynamicWidthProps {
   initialWidth?: number
   padding?: number
   fontSize?: string
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+  className?: string
 }
 
 const InputDynamicWidth = ({
@@ -15,7 +16,9 @@ const InputDynamicWidth = ({
   initialWidth,
   onKeyPress,
   padding = 1,
-  fontSize = '16px'
+  fontSize = '16px',
+  className = 'input-dynamic-width',
+  ...props
 }: InputDynamicWidthProps) => {
   const [value, setValue] = React.useState(initialValue)
   const [visible, setVisible] = React.useState(false)
@@ -46,15 +49,17 @@ const InputDynamicWidth = ({
         type="text"
         value={value}
         style={{ width: width }}
+        className={className}
         onKeyPress={onKeyPress}
         onChange={(event) => {
           const { value } = event.target
           setValue(value)
-          onChange(event)
+          if (onChange) onChange(event)
         }}
+        {...props}
       />
     </>
   )
 }
 
-export default React.memo(InputDynamicWidth, (prevProps, nextProps) => { return prevProps.initialValue === nextProps.initialValue })
+export default InputDynamicWidth
