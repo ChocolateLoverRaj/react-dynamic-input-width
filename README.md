@@ -7,19 +7,19 @@ Dynamically update the input width based on the input value length
 ## Getting Started
 
 ```
-npm i @jimsheen/react-dynamic-input-width
-yarn add @jimsheen/react-dynamic-input-width
+npm install @jimsheen/react-dynamic-input-width
 ```
 
 
-## Example
+## Examples
 
+Basic example
 
 ```
 import React from 'react';
 import Input from '@jimsheen/react-dynamic-input-width';
 
-const InputExample = () => {
+export default function InputExample() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
@@ -41,6 +41,66 @@ const InputExample = () => {
 }
 
 ```
+
+Full example using refs:
+
+```
+import React, { useEffect } from "react";
+import Input from "@jimsheen/react-dynamic-input-width";
+
+export default function InputExample() {
+  const [isEdit, setIsEdit] = React.useState(false);
+  const [value, setValue] = React.useState("Hello there");
+
+  // create a ref for the value span
+  const valueRef = React.useRef<HTMLSpanElement>(null);
+  
+  // create a ref for the input
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  // update value when input is changed
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setValue(value);
+  };
+
+  // example of handling "Enter" key press
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if ((e && e.key === "Enter") || !e) {
+      setIsEdit(!isEdit);
+    }
+  };
+
+  // toggle the input visibility
+  const handleClick = () => {
+    setIsEdit(!isEdit);
+  };
+
+  // focus the input when isEdit is true
+  useEffect(() => {
+    if (isEdit) inputRef.current?.focus();
+  }, [isEdit]);
+
+  return (
+    <>
+      <button onClick={handleClick}>Toggle Edit</button>
+      {!isEdit && <span ref={valueRef}>{value}</span>}
+      {isEdit && (
+        <Input
+          initialValue={value}
+          padding={0}
+          // set initialWidth to the width of the value span element
+          initialWidth={valueRef.current?.offsetWidth}
+          onChange={(e) => handleChange(e)}
+          onKeyPress={(e) => handleKeyPress(e)}
+          ref={inputRef}
+        />
+      )}
+    </>
+  );
+}
+```
+
 
 ### refs
 
@@ -64,6 +124,16 @@ It's also possible to pass additional props to the underlying input component su
 />
 ```
 
+## Props
+
+| Prop         	| Type   	| Default             	| Required 	| Description                                                     	|
+|--------------	|--------	|---------------------	|----------	|-----------------------------------------------------------------	|
+| initialValue 	| string 	| undefined           	| false    	| The input's initial value                                       	|
+| initialWidth 	| number 	| undefined           	| false    	| The input's initial width value in `px`                         	|
+| padding      	| number 	| 1                   	| false    	| Add's extra width to the input                                  	|
+| fontSize     	| string 	| 16px                	| false    	| The font size of the input (used for measuring the offsetWidth) 	|
+| className    	| string 	| input-dynamic-width 	| false    	| Default className                                               	|
+
 ## Types
 
 ```
@@ -78,6 +148,6 @@ className?: string
 
 ## Demo
 
-- [Basic Example](https://codesandbox.io/s/jimsheen-react-dynamic-input-width-example-1-b6pk7)
-- [Toggle Input Visibility Example]()
+- [Basic Example](https://codesandbox.io/s/basic-example-b6pk7)
+- [Toggle Input Visibility Example](https://codesandbox.io/s/full-example-mrghy)
 
