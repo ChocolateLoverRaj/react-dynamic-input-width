@@ -46,7 +46,7 @@ const setup = (props?: InputDynamicWidthProps) => {
   const newProps = {
     ...defaultProps,
     ...props
-  } as InputDynamicWidthProps;
+  } as any;
 
   const utils = render(<InputDynamicWidth {...newProps} />);
   // sometimes for awaiting an appearance of element it needs to be in a function

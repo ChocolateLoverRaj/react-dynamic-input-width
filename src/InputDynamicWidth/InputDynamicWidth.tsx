@@ -1,6 +1,6 @@
 import React from 'react'
 
-export interface InputDynamicWidthProps {
+export interface InputDynamicWidthProps extends React.HTMLProps<HTMLInputElement> {
   initialValue?: string
   initialWidth?: number
   padding?: number
@@ -18,6 +18,7 @@ const InputDynamicWidth = ({
   padding = 1,
   fontSize = '16px',
   className = 'input-dynamic-width',
+  ref,
   ...props
 }: InputDynamicWidthProps) => {
   const [value, setValue] = React.useState(initialValue)
@@ -46,20 +47,23 @@ const InputDynamicWidth = ({
         {visible && value}
       </span>
       <input
+        {...props}
         type="text"
         value={value}
         style={{ width: width }}
         className={className}
         onKeyPress={onKeyPress}
+        ref={ref}
         onChange={(event) => {
           const { value } = event.target
           setValue(value)
           if (onChange) onChange(event)
         }}
-        {...props}
       />
     </>
   )
 }
 
-export default InputDynamicWidth
+const WrapInputDynamicWidth = React.forwardRef<HTMLInputElement, InputDynamicWidthProps>((props, ref) => InputDynamicWidth({ ...props, ref }))
+
+export default WrapInputDynamicWidth
