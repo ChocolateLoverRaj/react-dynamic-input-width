@@ -24,14 +24,14 @@ const InputDynamicWidth = ({
   const [value, setValue] = React.useState(initialValue)
   const [visible, setVisible] = React.useState(false)
   const [width, setWidth] = React.useState<number>(!!initialWidth ? initialWidth + padding : 0 + padding)
-  const measurer = React.useRef<any>(null)
+  const measurer = React.useRef<HTMLElement>(null)
 
   React.useEffect(() => {
     setVisible(true)
   }, [value])
 
   React.useLayoutEffect(() => {
-    if (visible) {
+    if (visible && measurer?.current) {
       const rect = measurer.current.getBoundingClientRect()
       setWidth(rect.width + padding)
       setVisible(false)
