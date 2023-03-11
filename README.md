@@ -15,7 +15,7 @@ npm install @jimsheen/react-dynamic-input-width
 
 Basic example
 
-```
+```tsx
 import React from 'react';
 import Input from '@jimsheen/react-dynamic-input-width';
 
@@ -44,7 +44,7 @@ export default function InputExample() {
 
 Full example using refs:
 
-```
+```tsx
 import React, { useEffect } from "react";
 import Input from "@jimsheen/react-dynamic-input-width";
 
@@ -106,7 +106,7 @@ export default function InputExample() {
 
 Input accepts a ref by utilising the forwardRef HOC under the hood
 
-```
+```tsx
 const inputRef = React.useRef<HTMLInputElement>(null)
 
 <Input
@@ -118,7 +118,7 @@ const inputRef = React.useRef<HTMLInputElement>(null)
 
 It's also possible to pass additional props to the underlying input component such as "placeholder" for example
 
-```
+```tsx
 <Input
   placeholder="Placeholder text"
 />
